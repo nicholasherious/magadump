@@ -1,4 +1,5 @@
 import Head from 'next/head';
+
 import { getAllPosts } from '../lib/posts';
 import Header from '../components/Header';
 import MainCard from '../components/MainCard';
@@ -42,8 +43,6 @@ export default function Home({ posts }) {
 // Bring in wordpress data
 export async function getStaticProps() {
   const { posts } = await getAllPosts();
-console.log(posts)
-
   return {
     props: {
       posts
