@@ -1,7 +1,8 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 function MainCard({post}) {
-    console.log(post)
+    
   return (
       <div className="mb-4">
     <div className='rounded overflow-hidden shadow-lg'>
@@ -10,10 +11,11 @@ function MainCard({post}) {
           src={post.featuredImage.node.sourceUrl}
           alt='Mountain'
           layout='fill'
+          
         />
       </div>
       <div className='px-6 py-4'>
-        <div className='font-bold text-xl mb-2'>{post.title}</div>
+        <div className='font-bold text-xl mb-2'><Link href={`/${post.slug}`}><a>{post.title} </a></Link></div>
         <p className='text-gray-700 text-base'>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
           quia, nulla! Maiores et perferendis eaque, exercitationem praesentium
