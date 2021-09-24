@@ -1,22 +1,25 @@
 import {gql} from '@apollo/client'
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import {getApolloClient} from '../lib/apollo-client'
+import { client } from '../lib/apollo'
+import Image from 'next/image'
 
 export default function BlogPage( { post }) {
  
     return (
         <div>
           <Header />
-        <p>{post.title}</p>
+          <h1>{post.title}</h1>
+        <Image src={post.featuredImage.node.sourceUrl} width={300} height={80} />
+        
+        <div dangerouslySetInnerHTML={{__html: post.content}} />
         <Footer />
         </div>
     )
 }
 
 export async function getStaticPaths() {
-const apolloClient = getApolloClient();
-const result = await apolloClient.query({
+const result = await client.query({
     query: gql`
     query MyQuery {
         posts {
@@ -29,7 +32,7 @@ const result = await apolloClient.query({
 })
 
 
-
+console.log(result)
 return {
     paths: result.data.posts.nodes.map(({ slug }) => {
        return {
@@ -43,22 +46,35 @@ return {
 
 export async function getStaticProps({ params }) {
     const { slug } = params
-    const apolloClient = getApolloClient();
-const result = await apolloClient.query({
+    
+const result = await client.query({
     query: gql`
-    query MyQuery($slug: String!) {
+    query PostBySlug($slug: String!) {
         postBy(slug: $slug) {
-          content
-          title
-        }
-      }
-    `,
-    variables: {slug}
+            author {
+              node {
+                username
+              }
+            }
+            content
+            date
+            excerpt
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            title
+          }
+    }`,
+    variables: {
+        slug
+    }
 })
 
 return {
     props: {
-        post: result.data.postBy
+        post: result.data.postBy 
     }
 }
     

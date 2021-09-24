@@ -1,12 +1,20 @@
 import Head from 'next/head';
 
-import { getAllPosts } from '../lib/posts';
+import { client } from '../lib/apollo'
+import { gql } from '@apollo/client'
+
+
 import Header from '../components/Header';
 import MainCard from '../components/MainCard';
 import Footer from '../components/Footer';
 
-export default function Home({ posts }) {
+import {
+  QUERY_ALL_POSTS,
+} from '../data/posts';
 
+
+export default function Home({ posts }) {
+console.log(posts)
   return (
     <div>
       <Head>
@@ -44,10 +52,10 @@ export default function Home({ posts }) {
 
 // Bring in wordpress data
 export async function getStaticProps() {
-  const { posts } = await getAllPosts();
-  return {
-    props: {
-      posts
-    },
-  };
+  const result = await client.query({
+    query: QUERY_ALL_POSTS
+  });
+ 
+ const allPosts = result?.data.posts.edges.map(({ node = {} }) => node);
+  return { props: { posts: allPosts } }
 }
