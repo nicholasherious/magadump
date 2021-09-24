@@ -1,11 +1,15 @@
 import {gql} from '@apollo/client'
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 import {getApolloClient} from '../lib/apollo-client'
 
 export default function BlogPage( { post }) {
  
     return (
         <div>
+          <Header />
         <p>{post.title}</p>
+        <Footer />
         </div>
     )
 }

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { getAllPosts } from '../lib/posts';
 import Header from '../components/Header';
 import MainCard from '../components/MainCard';
+import Footer from '../components/Footer';
 
 export default function Home({ posts }) {
 
@@ -25,7 +26,7 @@ export default function Home({ posts }) {
           
           
         </div>
-        <div className="hidden w-1/2 md:inline   bg-red-200">
+        <div className="hidden w-1/2 md:inline  bg-gray-100">
         
           <h1>side</h1>
         
@@ -36,6 +37,7 @@ export default function Home({ posts }) {
 
 
       </main>
+      <Footer />
     </div>
   );
 }
