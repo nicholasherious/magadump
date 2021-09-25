@@ -3,16 +3,14 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { client } from '../lib/apollo'
 import Image from 'next/image'
+import SinglePost from '../components/SinglePost';
 
-export default function BlogPage( { post }) {
+export default function BlogPage({ post }) {
  
     return (
         <div>
           <Header />
-          <h1>{post.title}</h1>
-        <Image src={post.featuredImage.node.sourceUrl} width={300} height={80} />
-        
-        <div dangerouslySetInnerHTML={{__html: post.content}} />
+        <SinglePost post={post} /> 
         <Footer />
         </div>
     )

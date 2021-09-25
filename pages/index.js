@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 import {
   QUERY_ALL_POSTS,
 } from '../data/posts';
+import Main from '../components/Main';
 
 
 export default function Home({ posts }) {
@@ -28,7 +29,8 @@ console.log(posts)
         <div className="w-full md:w-3/4"> 
        {posts.map(post => {
          return (
-          <MainCard key={post.id} post={post} />
+          // <MainCard key={post.id} post={post} />
+          <Main key={post.id} post={post} />
          )
        })}
           
