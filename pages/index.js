@@ -12,6 +12,7 @@ import {
   QUERY_ALL_POSTS,
 } from '../data/posts';
 import Main from '../components/Main';
+import { SideBar } from '../components/SideBar';
 
 
 export default function Home({ posts }) {
@@ -36,9 +37,9 @@ console.log(posts)
           
           
         </div>
-        <div className="hidden w-1/2 md:inline  bg-gray-100">
+        <div className="hidden w-1/2 md:inline">
         
-          <h1>side</h1>
+         <SideBar />
         
         </div>
    
