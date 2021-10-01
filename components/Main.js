@@ -12,24 +12,28 @@ function Main({ post }) {
                 <div className="border-b border-gray-100"></div> 
                 <div className='relative text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2'><img className="rounded" src={post.featuredImage.node.sourceUrl} />
                 <div class="absolute top-0 right-0 -mt-3 mr-3">
-                        <div className="rounded-full bg-indigo-500 text-white text-xs py-1 pl-2 pr-3 leading-none"><i className="mdi mdi-fire text-base align-middle"></i> <span className="align-middle">FRESH</span></div>
+                        <div className="flex items-center rounded-full bg-indigo-500 text-white text-xs py-1 pl-2 pr-3 leading-none"><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+  <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd" />
+</svg> <span className="align-middle">FRESH</span></div>
                     </div>
                 </div>
+                
+
                 
                 <div className='text-gray-600 font-semibold text-lg mb-2 mx-3 px-2'><Link href={`/${post.slug}`}><a>{post.title} </a></Link></div>
                 <div className='text-gray-500 font-thin text-sm mb-6 mx-3 px-2'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500</div>
                 <div className="flex justify-start mb-4 border-t border-gray-100">
                     <div className="flex w-full mt-1 pt-2 pl-5">
-                        <span className="bg-white transition ease-out duration-300 hover:text-red-500 border w-8 h-8 px-2 pt-2 text-center rounded-full text-gray-400 cursor-pointer mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                            </svg>
-                        </span>
-                        <img className="inline-block object-cover w-8 h-8 text-white border-2 border-white rounded-full shadow-sm cursor-pointer" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                        <img className="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                        <img className="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="" />
-                        <img className="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt="" />
-                    </div>
+                         <span className="flex h-min w-min space-x-1 items-center rounded-md text-gray-400 hover:text-rose-600 bg-gray-100 hover:bg-rose-50 py-2 px-2 text-xs font-medium">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 fill-current hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+      <p className="font-semibold text-xs">10</p>
+    </span>
+    
+                       
+                        
+                           </div>
                     <div className="flex justify-end w-full mt-1 pt-2 pr-5 space-x-2">
                         
                         <button className="bg-blue-500 p-2 font-semibold text-white inline-flex items-center space-x-2 rounded">
@@ -48,27 +52,11 @@ function Main({ post }) {
                     </div>
                     <div className="mt-3 mx-5 w-full flex justify-end">
                         <div className='flex text-gray-700 font-normal text-sm rounded-md mb-2 mr-4 items-center'>
-                        <span className="flex h-min w-min space-x-1 items-center rounded-full text-gray-400 hover:text-rose-600 bg-gray-700 hover:bg-rose-50 py-1 px-2 text-xs font-medium">
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 fill-current hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-      </svg>
-      <p className="font-semibold text-xs">10</p>
-    </span>
+<p>{new Date().toLocaleString() + ""}</p>
                         </div>
                     </div>
                 </div>
-                <div className="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
-                    <img className='w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer' alt='User avatar' src='https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200' />
-                    <span className="absolute inset-y-0 right-0 flex items-center pr-6">
-                        <button type="submit" className="p-1 focus:outline-none focus:shadow-none hover:text-blue-500">
-                        <svg className="w-6 h-6 transition ease-out duration-300 hover:text-blue-500 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-
-                        </button>
-                    </span>
-                     <input type="search" className="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue" style={{borderRadius: "25px"}} placeholder="Post a comment..." autocomplete="off" />
-                </div>
+              
             </div>
         </div>
     </div>

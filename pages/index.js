@@ -11,7 +11,8 @@ import Footer from '../components/Footer';
 import {
   QUERY_ALL_POSTS,
 } from '../data/posts';
-import Main from '../components/Main';
+// import Main from '../components/Main';
+import RMain from '../components/RMain';
 import { SideBar } from '../components/SideBar';
 
 
@@ -27,17 +28,17 @@ console.log(posts)
       <main className="flex gap-4 max-w-6xl mx-auto px-8 sm:px-16 pt-6">
        
 
-        <div className="w-full md:w-3/4"> 
+        <div className="w-full"> 
        {posts.map(post => {
          return (
           // <MainCard key={post.id} post={post} />
-          <Main key={post.id} post={post} />
+          <RMain key={post.id} post={post} />
          )
        })}
           
           
         </div>
-        <div className="hidden w-1/2 md:inline">
+        <div className="hidden w-1/2 lg:inline">
         
          <SideBar />
         
