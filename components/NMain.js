@@ -7,11 +7,11 @@ function NMain({ post }) {
         <div className='md:flex-shrink-0'>
           <img
             className='h-40 w-full object-cover md:w-40'
-            src={post.featuredImage.node.sourceUrl}
-            alt='A cat'
+            src={post.image}
+            alt={post.title}
           />
         </div>
-        <div className='p-4'>
+        <div className='px-4'>
           <div className='flex tracking-wide text-xs text-gray-400'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -47,39 +47,38 @@ function NMain({ post }) {
           </div>
           <div>
             <Link
-              href={`/${post.slug}`}
-              className='block mt-1 text-lg leading-tight font-medium text-black hover:underline'
+              href={post.url}
+            
             >
               <a className='block mt-1 text-lg leading-tight font-medium text-black hover:underline'>
-                {post.title}{' '}
+                {post.title}
               </a>
             </Link>
 
-            <p className='mt-2 text-gray-500'>
-              According to a study, it has been proven that there is a tight
-              bond between cats and humans.
+            <p className='mt-2 text-sm text-gray-500'>
+              {post.description}
             </p>
           </div>
           <div className='flex'>
             <span
-              className='tracking-wider text-white bg-red-500 px-4 py-1 text-sm rounded leading-loose font-semibold'
+              className='tracking-wider text-white bg-red-500 px-4 py-1 text-xs rounded leading-loose font-semibold'
               title=''
             >
-              <i className='fas fa-star' aria-hidden='true'></i> Admin
+               Admin
             </span>
 
             <span
-              className='tracking-wider text-white bg-red-500 px-4 py-1 text-sm rounded leading-loose mx-2 font-semibold'
+              className='tracking-wider text-white bg-red-500 px-4 py-1 text-xs rounded leading-loose mx-2 font-semibold'
               title=''
             >
-              <i className='fas fa-heart' aria-hidden='true'></i> User
+              User
             </span>
 
             <span
-              className='tracking-wider text-white bg-blue-500 px-4 py-1 text-sm rounded leading-loose mx-2 font-semibold'
+              className='tracking-wider text-white bg-blue-500 px-4 py-1 text-xs rounded leading-loose mx-2 font-semibold'
               title=''
             >
-              <i className='fas fa-award' aria-hidden='true'></i> Winner
+               Winner
             </span>
           </div>
         </div>

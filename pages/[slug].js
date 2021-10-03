@@ -1,6 +1,5 @@
 import {gql} from '@apollo/client'
-import Footer from '../components/Footer';
-import Header from '../components/Header';
+
 import { client } from '../lib/apollo'
 import Image from 'next/image'
 import SinglePost from '../components/SinglePost';
@@ -9,9 +8,9 @@ export default function BlogPage({ post }) {
  
     return (
         <div>
-          <Header />
+       
         <SinglePost post={post} /> 
-        <Footer />
+     
         </div>
     )
 }

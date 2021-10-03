@@ -1,21 +1,23 @@
 import Image from 'next/image';
-import { useState } from 'react'
+import Link from 'next/link'
 import { SearchIcon, GlobeAltIcon, MenuIcon, UserCircleIcon, UsersIcon } from '@heroicons/react/solid';
 import Submit from './Submit';
 
 function Header() {
-  const [toggleSubmit, setToggleSubmit] = useState(false)
+  
   return (
     <div>
     <header className='sticky top-0 z-50 grid grid-cols-2 bg-black shadow-md p-1 md:px-2'>
       {/* Left */}
       <div className='relative flex items-center h-10 cursor-pointer my-auto'>
+      <Link href="/">
         <Image
           src='http://nowaygir.wwwmi3-ls7.a2hosted.com/wp-content/uploads/2021/09/logo.jpg'
           layout='fill'
           objectFit='contain'
           objectPosition='left'
         />
+        </Link>
       </div>
 
       {/* Middle */}
@@ -42,13 +44,15 @@ function Header() {
               <MenuIcon className="h-6" />
               <UserCircleIcon className="h-6" />
           </div>
-          <button onClick={() => setToggleSubmit(!toggleSubmit)} className="hidden md:inline px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80">
+          <Link href="/submit">
+          <button className="hidden md:inline px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80">
     Add Post
 </button>
+</Link>
       </div>
     </header>
     <div>
-      {!toggleSubmit ?  null : <Submit />}
+   
       
     </div>
     </div>
