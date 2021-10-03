@@ -9,6 +9,7 @@
     "@apollo/client": "^3.4.13",
     "@heroicons/react": "^1.0.4",
     "@mdi/react": "^1.5.0",
+    "axios": "^0.22.0",
     "graphql": "^15.6.0",
     "next": "latest",
     "react": "^17.0.2",
