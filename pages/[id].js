@@ -1,5 +1,6 @@
 import Axios from "axios";
 import { useRouter } from "next/router";
+import SinglePost from "../components/SinglePost";
 
 // router is required for fallback: true
 const Post = ({ post }) => {
@@ -11,9 +12,7 @@ const Post = ({ post }) => {
 
   return (
     <div>
-      <h1>Post page</h1>
-      <h2>{post.title}</h2>
-      <p>{post.body}</p>
+      <SinglePost postSingle={post}/>
     </div>
   );
 };
