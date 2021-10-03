@@ -47,7 +47,7 @@ function NMain({ post }) {
           </div>
           <div>
             <Link
-              href={post.url}
+              href={post._id}
             
             >
               <a className='block mt-1 text-lg leading-tight font-medium text-black hover:underline'>
