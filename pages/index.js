@@ -12,7 +12,7 @@ import {
   QUERY_ALL_POSTS,
 } from '../data/posts';
 // import Main from '../components/Main';
-import RMain from '../components/RMain';
+import NMain from '../components/NMain';
 import { SideBar } from '../components/SideBar';
 
 
@@ -32,7 +32,7 @@ console.log(posts)
        {posts.map(post => {
          return (
           // <MainCard key={post.id} post={post} />
-          <RMain key={post.id} post={post} />
+          <NMain key={post.id} post={post} />
          )
        })}
           
