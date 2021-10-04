@@ -3,6 +3,14 @@ import { GetCommentCount } from './GetCommentCount';
 import { useState } from 'react'
 
 import ReactTimeAgo from 'react-time-ago'
+
+import {
+    FacebookShareButton,
+    TwitterShareButton,
+    FacebookIcon,
+    TwitterIcon
+  } from "react-share";
+
 import { ExtendRead } from './ExtendRead';
 
 function NMain({ post }) {
@@ -98,7 +106,25 @@ function NMain({ post }) {
   <path fillRule="evenodd" d="M9.243 3.03a1 1 0 01.727 1.213L9.53 6h2.94l.56-2.243a1 1 0 111.94.486L14.53 6H17a1 1 0 110 2h-2.97l-1 4H15a1 1 0 110 2h-2.47l-.56 2.242a1 1 0 11-1.94-.485L10.47 14H7.53l-.56 2.242a1 1 0 11-1.94-.485L5.47 14H3a1 1 0 110-2h2.97l1-4H5a1 1 0 110-2h2.47l.56-2.243a1 1 0 011.213-.727zM9.03 8l-1 4h2.938l1-4H9.031z" clipRule="evenodd" />
 </svg>
         </div>
-        
+        {/* // Share Buttons */}
+        <div className="ml-2">
+        <FacebookShareButton
+            url={`http://localhost:3000/${post._id}`}
+            quote={post.title}
+            className=""
+          >
+            <FacebookIcon size={24} round />
+          </FacebookShareButton>
+        </div>
+        <div className="ml-2">
+        <TwitterShareButton
+            url={`http://localhost:3000/${post._id}`}
+            title={post.title}
+            className=""
+          >
+            <TwitterIcon size={24} round />
+          </TwitterShareButton>
+        </div>
           </div>
         </div>
       </div>
