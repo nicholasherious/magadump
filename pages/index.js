@@ -5,6 +5,12 @@ import Axios from 'axios'
 import { SideBar } from '../components/SideBar';
 import NMain from '../components/NMain';
 
+import TimeAgo from 'javascript-time-ago'
+
+import en from 'javascript-time-ago/locale/en.json'
+
+TimeAgo.addDefaultLocale(en)
+
 
 export default function Home({data}) {
 console.log(data)

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { GetCommentCount } from './GetCommentCount';
 import { useState } from 'react'
 
-import Truncate from 'react-truncate';
+import ReactTimeAgo from 'react-time-ago'
 import { ExtendRead } from './ExtendRead';
 
 function NMain({ post }) {
@@ -20,25 +20,12 @@ function NMain({ post }) {
         </div>
         <div className='px-4 mt-2 md:mt-0'>
           <div className='flex tracking-wide text-xs text-gray-400'>
+            
+          <span>Posted by: {post.name}</span>
+          <span className="ml-1"><ReactTimeAgo date={post.createdAt} locale="en-US"/> </span>
             <svg
               xmlns='http://www.w3.org/2000/svg'
-              className='h-4 w-4'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z'
-              />
-            </svg>
-            <p className='px-1'>209 Shares</p>
-
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-4 w-4'
+              className='h-4 w-4 ml-2'
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
@@ -51,6 +38,7 @@ function NMain({ post }) {
               />
             </svg>
             <p className="px-1"><GetCommentCount countComments={post}/></p>
+            
           </div>
           <div>
             <Link
@@ -71,19 +59,22 @@ function NMain({ post }) {
             </p>
           </div>
           <div className='flex items-center'>
-          <div className="m-2 border border-gray-400 dark:border-gray-500 rounded-md relative bg-gray-200 dark:bg-gray-700">
-          <div className="inline-flex items-center px-2 py-1 text-xs text-gray-700 dark:text-gray-200 font-semibold"  >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-  <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd" />
+          <div className=" border border-gray-200 dark:border-gray-500 rounded-md relative bg-gray-100 dark:bg-gray-700">
+          <button className="inline-flex items-center px-2 py-1 text-xs text-gray-700 dark:text-gray-200 font-semibold"  >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+  <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
 </svg>
-            Boost
-          </div>
+            
+          </button>
         </div>
 
-        <div className="m-2 border border-blue-400 dark:border-blue-500 rounded-md relative bg-blue-200 dark:bg-blue-700">
-          <div className="px-2 py-1 text-xs text-blue-700 dark:text-blue-200 font-semibold">
-            Dump
-          </div>
+        <div className="m-1 border border-gray-200 dark:border-gray-500 rounded-md relative bg-gray-100 dark:bg-gray-700">
+          <button className="inline-flex items-center px-2 py-1 text-xs text-gray-700 dark:text-gray-200 font-semibold"  >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-red-800" viewBox="0 0 20 20" fill="currentColor">
+  <path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z" />
+</svg>
+            
+          </button>
         </div>
 
  {!readMore ? 
@@ -101,6 +92,13 @@ function NMain({ post }) {
 </svg>
           </button>
         </div> }
+
+        <div>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+  <path fillRule="evenodd" d="M9.243 3.03a1 1 0 01.727 1.213L9.53 6h2.94l.56-2.243a1 1 0 111.94.486L14.53 6H17a1 1 0 110 2h-2.97l-1 4H15a1 1 0 110 2h-2.47l-.56 2.242a1 1 0 11-1.94-.485L10.47 14H7.53l-.56 2.242a1 1 0 11-1.94-.485L5.47 14H3a1 1 0 110-2h2.97l1-4H5a1 1 0 110-2h2.47l.56-2.243a1 1 0 011.213-.727zM9.03 8l-1 4h2.938l1-4H9.031z" clipRule="evenodd" />
+</svg>
+        </div>
+        
           </div>
         </div>
       </div>
