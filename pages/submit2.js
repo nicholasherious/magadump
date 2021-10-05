@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import Alert from './Alert';
+import Alert from '../components/Alert';
 
 const formUrl = 'http://localhost:3001/posts';
 
@@ -32,27 +32,24 @@ export default function Submit() {
   };
 
   return (
-    <div className='mt-1'>
-      <div className='editor mx-auto flex flex-col text-gray-800  p-1 w-full'>
-      <textarea
-          className='description bg-gray-100 sec mb-4 p-3 h-40 border border-gray-300 outline-none resize-none'
-          spellcheck='false'
-          placeholder='Title'
-          value={formData.desc}
-          onChange={handleChange}
-          name='desc'
-          maxlength="90"
-          
-        ></textarea>
+    <div className='mt-6'>
+      <div className='editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl'>
         <input
-          className='title bg-gray-100 border border-gray-300 p-2 outline-none'
+          className='title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none'
           spellcheck='false'
           placeholder='Link'
           type='text'
           onChange={handleChange}
           name='link'
         />
-        
+        <textarea
+          className='description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none'
+          spellcheck='false'
+          placeholder='Describe everything about the link you are posting'
+          value={formData.desc}
+          onChange={handleChange}
+          name='desc'
+        ></textarea>
 
         <div className='icons flex text-gray-500 m-2'>
           <svg
