@@ -28,6 +28,7 @@ function SinglePost({ postSingle }) {
 			<p>{postSingle.description}</p>
 		</div>
         <div>
+			{postSingle.url ?  
         <Link
               href={postSingle.url}
             
@@ -35,7 +36,7 @@ function SinglePost({ postSingle }) {
               <a className='block mt-1 text-lg leading-tight font-medium text-black hover:underline'>
                 Read More...
               </a>
-            </Link>
+            </Link> : null}
         </div>
         <div>
           
