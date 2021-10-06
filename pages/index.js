@@ -21,7 +21,7 @@ console.log(data)
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className="flex gap-4 max-w-6xl mx-auto px-8 sm:px-16 pt-6">
+      <main className="flex gap-4 md:max-w-6xl mx-auto px-2 md:px-8 sm:px-16 pt-6">
        
 
         <div className="w-full"> 

@@ -17,9 +17,9 @@ function NMain({ post }) {
   const [readMore, setReadMore] = useState(false);
 
   return (
-    <div className='w-full bg-white  shadow-sm overflow-hidden md:max-w-2xl mb-2 py-2'>
-      <div className='grid grid-cols-4'>
-        <div className='w-full overflow-hidden h-32'>
+    <div className='w-full bg-white shadow-sm overflow-hidden md:max-w-2xl mb-2 py-2'>
+      <div className='md:grid md:grid-cols-4'>
+        <div className='w-full overflow-hidden md:h-32 h-60'>
           <img
             className='object-cover w-full h-full rounded-lg '
             src={post.image}
@@ -27,7 +27,7 @@ function NMain({ post }) {
           />
         </div>
         <div className='w-full col-span-3 '>
-          <div className='px-4 mt-2 md:mt-0'>
+          <div className='md:px-4 mt-2 md:mt-0'>
             <div className='flex tracking-wide text-xs text-gray-400'>
               <span>Posted by: {post.name}</span>
               <span className='bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2 rounded-md ml-1'>
