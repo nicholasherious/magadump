@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import useSWR from 'swr'
 import Axios from 'axios'
 
 
@@ -11,9 +12,15 @@ import en from 'javascript-time-ago/locale/en.json'
 
 TimeAgo.addDefaultLocale(en)
 
+const URL = 'http://localhost:3001/posts'
 
-export default function Home({data}) {
+const fetcher = url => Axios.get(url).then(res => res.data)
 
+export default function Home({ fallbackData }) {
+  const { data, error } = useSWR(URL, fetcher, { fallbackData, refreshInterval: 1000 }, )
+  if (error) return <div>failed to load</div>
+  if (!data) return <div>loading...</div>
+console.log(data)
   return (
     <div>
       <Head>
@@ -50,10 +57,15 @@ export default function Home({data}) {
   );
 }
 
-// Bring in database data
-export const getStaticProps = async () => {
-  const res = await Axios.get("http://localhost:3001/posts");
-  return {
-    props: { data: res.data},
-  };
-};
+export async function getServerSideProps() {
+  const data = await fetcher(URL)
+  return { props: { fallbackData: data } }
+}
+
+// // Bring in database data
+// export const getServerSideProps = async () => {
+//   const res = await Axios.get("http://localhost:3001/posts");
+//   return {
+//     props: { data: res.data},
+//   };
+// };
