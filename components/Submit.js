@@ -1,13 +1,18 @@
 import axios from 'axios';
 import { useState } from 'react';
 import Alert from './Alert';
+import { useSession, getSession } from 'next-auth/react';
 
 const formUrl = 'http://localhost:3001/posts';
 
 export default function Submit() {
+  const { data: session, status } = useSession();
+  console.log(session.user.name);
   const [formData, setFormData] = useState({
     link: '',
     desc: '',
+    name: session.user.name,
+    image: session.user.image,
   });
   const [linkData, setLinkData] = useState('');
 
@@ -34,15 +39,14 @@ export default function Submit() {
   return (
     <div className='mt-1'>
       <div className='editor mx-auto flex flex-col text-gray-800  p-1 w-full'>
-      <textarea
+        <textarea
           className='description bg-gray-100 sec mb-4 p-3 h-40 border border-gray-300 outline-none resize-none'
           spellcheck='false'
           placeholder='Title'
           value={formData.desc}
           onChange={handleChange}
           name='desc'
-          maxlength="90"
-          
+          maxlength='90'
         ></textarea>
         <input
           className='title bg-gray-100 border border-gray-300 p-2 outline-none'
@@ -52,7 +56,6 @@ export default function Submit() {
           onChange={handleChange}
           name='link'
         />
-        
 
         <div className='icons flex text-gray-500 m-2'>
           <svg
@@ -109,7 +112,6 @@ export default function Submit() {
         </div>
 
         <div className='buttons flex'>
-            
           <div className='btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto'>
             Cancel
           </div>
@@ -125,4 +127,3 @@ export default function Submit() {
     </div>
   );
 }
-

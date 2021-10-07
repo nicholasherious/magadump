@@ -11,7 +11,7 @@ function SinglePost({ postSingle }) {
 			<h1 className="text-4xl font-bold md:tracking-tight md:text-5xl">{postSingle.title}</h1>
 			<div className="flex flex-col items-start justify-between w-full md:flex-row md:items-center text-coolGray-600">
 				<div className="flex items-center md:space-x-2">
-					<img src="https://source.unsplash.com/75x75/?portrait" alt="" className="w-4 h-4 border rounded-full bg-coolGray-500 border-coolGray-300" />
+					<img src={postSingle.authorImg} alt="" className="w-4 h-4 border rounded-full bg-coolGray-500 border-coolGray-300" />
 					<p className="text-sm">Posted by: {postSingle.name} • July 19th, 2021</p>
 				</div>
 				<p className="flex-shrink-0 mt-3 text-sm md:mt-0">Publisher: {postSingle.publisher}</p>
@@ -27,7 +27,8 @@ function SinglePost({ postSingle }) {
 		<div className="text-coolGray-800">
 			<p>{postSingle.description}</p>
 		</div>
-        <div>
+        <div className="">
+			
 			{postSingle.url ?  
         <Link
               href={postSingle.url}
@@ -37,6 +38,7 @@ function SinglePost({ postSingle }) {
                 Read More...
               </a>
             </Link> : null}
+			
         </div>
         <div>
           

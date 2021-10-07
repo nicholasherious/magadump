@@ -13,7 +13,7 @@ TimeAgo.addDefaultLocale(en)
 
 
 export default function Home({data}) {
-console.log(data)
+
   return (
     <div>
       <Head>
