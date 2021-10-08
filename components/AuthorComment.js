@@ -1,7 +1,10 @@
-export const AuthorComment = ({ author }) => {
+import { useState } from 'react'
 
-	// Split Name 
-const firstName = author.name.split(" ")[0]
+export const AuthorComment = ({ author }) => {
+	const [firstName, setFirstName] = useState(null && author.name.split(" ")[0])
+
+
+
 
 
     return (
