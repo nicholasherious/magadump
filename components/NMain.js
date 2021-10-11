@@ -45,7 +45,7 @@ function NMain({ post }) {
                 </svg>
                 <ReactTimeAgo date={post.createdAt} locale='en-US' />
               </span>
-            
+
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 className='h-4 w-4 ml-2'

@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react';
 import useSWR from 'swr';
-import useSWRInfinite from 'swr/infinite'
+import useSWRInfinite from 'swr/infinite';
 import axios from 'axios';
 
-import useOnScreen from '../hooks/useOnScreen'
+import useOnScreen from '../hooks/useOnScreen';
 
 import { SideBar } from '../components/SideBar';
 import NMain from '../components/NMain';
@@ -13,41 +13,41 @@ import TimeAgo from 'javascript-time-ago';
 
 import en from 'javascript-time-ago/locale/en.json';
 
+import useRequest from '../lib/useRequest';
+
 TimeAgo.addDefaultLocale(en);
 
-const fetcher = url => axios.get(url).then(res => res.data.postMessages);
-const URL = 'http://localhost:3001/posts';
-const PAGE_SIZE = 12
-
-
+const fetcher = url => axios.get(url).then(res => res.data);
 
 const getKey = (pageIndex, previousPageData) => {
-  if (previousPageData && !previousPageData.length) return null // reached the end
-  return URL + `?page=${pageIndex}`                    // SWR key
+  if (previousPageData && !previousPageData.length) return null; // reached the end
+  return `http://localhost:3001/posts?page=${pageIndex}&limit=10`; // SWR key
+};
+
+function Page({ index }) {
+  const { dataAgain } = useRequest({
+    url: 'http://localhost:3001/posts?page=1&limit=10',
+  });
+
+  console.log(dataAgain);
+  const { data } = useSWR(
+    `http://localhost:3001/posts?page=${index}&limit=10`,
+    fetcher
+  );
+
+  // ... handle loading and error states
+  if (!data) return 'loading';
+
+  return data.docs.map(post => <NMain post={post} />);
 }
 
 export default function Home() {
+  const [cnt, setCnt] = useState(1);
 
-
-  const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(getKey, fetcher)
-  if (!data) return 'loading'
-
-  
-
-  const issues = data ? [].concat(...data) : [];
-  const isLoadingInitialData = !data && !error;
-  const isLoadingMore =
-    isLoadingInitialData ||
-    (size > 0 && data && typeof data[size - 1] === "undefined");
-  const isEmpty = data?.[0]?.length === 0;
-  const isReachingEnd =
-    isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
-  const isRefreshing = isValidating && data && data.length === size;
-
- 
-
-
-console.log(issues)
+  const pages = [];
+  for (let i = 0; i < cnt; i++) {
+    pages.push(<Page index={i} key={i} />);
+  }
 
   return (
     <div>
@@ -58,28 +58,10 @@ console.log(issues)
 
       <main className='flex gap-4 md:max-w-6xl mx-auto px-2 md:px-8 sm:px-16 pt-6'>
         <div className='w-full'>
-          {issues.map(post => {
-            return (
-              <NMain key={post.id} post={post} />
-            )
-            
-          })}
-       
-    <button
-          disabled={isLoadingMore || isReachingEnd}
-          onClick={() => setSize(size + 1)}
-        >
-          {isLoadingMore
-            ? "loading..."
-            : isReachingEnd
-            ? "no more issues"
-            : "load more"}
-        </button>
-    
+          {pages}
+          <button onClick={() => setCnt(cnt + 1)}>Load More</button>
         </div>
-        <div>
-       
-          </div>
+
         <div className='hidden w-1/2 lg:inline'>
           <SideBar />
         </div>
@@ -87,21 +69,3 @@ console.log(issues)
     </div>
   );
 }
-
-// export async function getServerSideProps() {
-//   const data = await fetcher(URL);
-//   return { props: { fallbackData: data } };
-// }
-
-// export async function getServerSideProps() {
-//   const data = await fetcher(URL)
-//   return { props: { fallbackData: data } }
-// }
-
-// // Bring in database data
-// export const getServerSideProps = async () => {
-//   const res = await Axios.get("http://localhost:3001/posts");
-//   return {
-//     props: { data: res.data},
-//   };
-// };

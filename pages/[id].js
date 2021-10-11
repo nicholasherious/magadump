@@ -1,6 +1,6 @@
-import Axios from "axios";
-import { useRouter } from "next/router";
-import SinglePost from "../components/SinglePost";
+import Axios from 'axios';
+import { useRouter } from 'next/router';
+import SinglePost from '../components/SinglePost';
 
 // router is required for fallback: true
 const Post = ({ post }) => {
@@ -12,7 +12,7 @@ const Post = ({ post }) => {
 
   return (
     <div>
-      <SinglePost postSingle={post}/>
+      <SinglePost postSingle={post} />
     </div>
   );
 };
@@ -30,9 +30,11 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
-  const { data } = await Axios.get("http://localhost:3001/posts");
-  const posts = data.postMessages;
-  const paths = posts.map((post) => ({ params: { id: post._id.toString() } }));
+  const { data } = await Axios.get('http://localhost:3001/posts?');
+  const posts = data.docs;
+  const paths = posts.map(post => ({
+    params: { id: post._id.toString() },
+  }));
   return {
     paths,
     fallback: true,
