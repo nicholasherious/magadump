@@ -6,30 +6,26 @@ import NMain from '../components/NMain';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import useSWR from 'swr'
 
 TimeAgo.addDefaultLocale(en);
 
 const fetcher = url => axios.get(url).then(res => res.data);
 
-export default function Home({ data }) {
-  const BACKEND_API_URL = process.env.API_URL;
-  const [posts, setPosts] = useState({ data });
+export default function Home() {
+  const [pageIndex, setPageIndex] = useState(1);
 
-  const getMorePosts = async () => {
-    const newPosts = await axios
-      .get(`${BACKEND_API_URL}?page=${posts.page}&limit=10`)
-      .then(res => res.data);
+  // The API URL includes the page index, which is a React state.
+  const { data } = useSWR(`http://localhost:3001/posts?page=${pageIndex}`, fetcher);
 
-    setPosts(post => {
-      [...post, newPosts];
-    });
-  };
+
+  console.log(data)
 
   if (!data) {
     return <div>Loading...</div>;
   }
 
-  console.log(posts);
+
   return (
     <div>
       <Head>
@@ -39,6 +35,11 @@ export default function Home({ data }) {
 
       <main className='flex gap-4 md:max-w-6xl mx-auto px-2 md:px-8 sm:px-16 pt-6'>
         <div className='w-full'>
+        <div>
+    {data.posts.map(post=> <NMain post={post} />)}
+    <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
+    <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
+  </div>
           {/* <InfiniteScroll
             dataLength={posts.page}
             next={getMorePosts}
@@ -60,16 +61,3 @@ export default function Home({ data }) {
   );
 }
 
-export async function getServerSideProps() {
-  const BACKEND_API_URL = process.env.API_URL;
-
-  const data = await axios
-    .get(`${BACKEND_API_URL}?limit=10&page=1`)
-    .then(res => res.data);
-
-  return {
-    props: {
-      data,
-    },
-  };
-}

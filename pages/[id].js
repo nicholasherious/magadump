@@ -31,8 +31,8 @@ export const getStaticProps = async ({ params }) => {
 
 export const getStaticPaths = async () => {
   const { data } = await Axios.get('http://localhost:3001/posts?');
-  const posts = data.docs;
-  const paths = posts.map(post => ({
+  
+  const paths = data.posts.map(post => ({
     params: { id: post._id.toString() },
   }));
   return {
