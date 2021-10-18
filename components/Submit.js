@@ -7,12 +7,13 @@ const formUrl = 'http://localhost:3001/posts';
 
 export default function Submit() {
   const { data: session, status } = useSession();
-  console.log(session.user.name);
+  console.log(session);
   const [formData, setFormData] = useState({
     link: '',
     desc: '',
     name: session.user.name,
     image: session.user.image,
+    userData: session.user.email.split('@')[0],
   });
   const [linkData, setLinkData] = useState('');
 
@@ -35,6 +36,8 @@ export default function Submit() {
     console.log(formData);
     console.log(linkData);
   };
+
+  console.log(formData);
 
   return (
     <div className='mt-1'>
