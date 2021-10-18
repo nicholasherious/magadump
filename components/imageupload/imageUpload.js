@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { useSession, getSession } from "next-auth/react"
 import axios from 'axios';
 
 const baseStyle = {
@@ -29,6 +30,7 @@ const rejectStyle = {
 };
 
 function ImageUpload(props) {
+  const { data: session, status } = useSession();
   const [image, setImage] = useState([]);
   const [imageTitle, setImageTitle] = useState({
     desc: '',
@@ -83,6 +85,8 @@ function ImageUpload(props) {
     const data = new FormData();
     data.append('image', image[0]);
     data.append('title', imageTitle.desc)
+    data.append('userData', session.user.email.split('@')[0])
+    data.append('name', session.user.name)
 
     console.log(data)
 

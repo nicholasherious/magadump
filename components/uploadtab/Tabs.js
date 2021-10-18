@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import ImageUpload from '../imageupload/ImageUpload';
+
+import ImageUpload from '../imageupload/imageUpload';
+import ImageUploader from '../imageupload/imageUploadv2';
 
 import Submit from '../Submit';
 
@@ -78,7 +80,7 @@ const Tabs = ({ color }) => {
                   <Submit />
                 </div>
                 <div className={openTab === 2 ? 'block' : 'hidden'} id='link2'>
-                  <ImageUpload />
+                  <ImageUploader />
                   
                 </div>
                 <div className={openTab === 3 ? 'block' : 'hidden'} id='link3'>
