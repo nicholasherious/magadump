@@ -3,6 +3,9 @@ import Tabs from '../components/uploadtab/Tabs'
 
 export default function submit  () {
     const { data: session, status } = useSession()
+    
+
+console.log(status)
 
     if (status === "loading") {
         return <p>Loading...</p>
@@ -28,4 +31,12 @@ export default function submit  () {
            <Tabs /> 
         </div>
     )
+}
+
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      session: await getSession(context),
+    },
+  }
 }

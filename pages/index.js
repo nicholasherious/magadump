@@ -7,6 +7,8 @@ import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import useSWR from 'swr';
+
+import FrontMain from '../components/FrontMain'
 // import FrontMain from '../components/FrontMain'
 
 TimeAgo.addDefaultLocale(en);
@@ -38,8 +40,11 @@ export default function Home() {
       <main className='flex gap-4 md:max-w-6xl mx-auto px-2 md:px-8 sm:px-16 pt-6'>
         <div className='w-full'>
           <div>
-            {data.posts.map(post => (
+            {/* {data.posts.map(post => (
               <NMain post={post} />
+            ))} */}
+            {data.posts.map(post => (
+              <FrontMain post={post} />
             ))}
             <button onClick={() => setPageIndex(pageIndex - 1)}>
               Previous

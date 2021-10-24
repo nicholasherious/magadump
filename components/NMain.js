@@ -20,9 +20,9 @@ function NMain({ post }) {
   return (
     <div className='w-full overflow-hidden md:max-w-2xl mb-2 p-2 bg-white shadow-lg rounded-lg border-1'>
       <div className='md:grid md:grid-cols-4 '>
-        <div className='w-full overflow-hidden md:h-32 h-60'>
+        <div className='w-full overflow-hidden md:h-48 h-48'>
           <img
-            className='object-cover w-full h-full rounded-lg '
+            className='object-cover w-full h-48 rounded-lg '
             src={post.image}
             alt={post.title}
           />
