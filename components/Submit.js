@@ -1,19 +1,18 @@
 import axios from 'axios';
 import { useState } from 'react';
 import Alert from './Alert';
-import { useSession, getSession } from 'next-auth/react';
+
 
 const formUrl = 'http://localhost:3001/posts';
 
 export default function Submit() {
-  const { data: session, status } = useSession();
-  console.log(session);
+ 
   const [formData, setFormData] = useState({
     link: '',
     desc: '',
-    name: session.user.name,
-    image: session.user.image,
-    userData: session.user.email.split('@')[0],
+    name: '',
+    image: '',
+    userData: '',
   });
   const [linkData, setLinkData] = useState('');
 
@@ -64,7 +63,7 @@ export default function Submit() {
     <span class="inline-flex  items-center px-3 border-t bg-gray-100 border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
         http://
     </span>
-    <input type="text" onChange={handleChange} name='link' className="flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-gray-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="www.google.com"/>
+    <input type="text" onChange={handleChange} name='link' className="flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-gray-100 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="url" placeholder="www.google.com"/>
     </div>
 
         <div className='icons flex text-gray-500 m-2'>

@@ -1,6 +1,65 @@
+import { useState } from 'react'
+import FetchAPI from '../lib/fetcher'
+import { useRouter } from 'next/router';
+import { useContext } from "react";
+import { AuthContext } from "../utils/AuthProvider";
 
+
+
+const config = {
+	withCredentials: true,
+	headers: {
+	  'Content-Type': 'application/json',
+	},
+  };
+
+  
 
 function login() {
+	const {userDetails, setUserDetails, loggedIn, setLoggedIn} = useContext(AuthContext);
+
+	const [loginData, setLoginData] = useState({
+		username: '',
+		password: ''
+	})
+	const router = useRouter();
+
+	const handleChange = (e) => {
+		setLoginData({ ...loginData, [e.target.name]: e.target.value });
+	}
+
+
+	
+
+	const getUser = () => {
+		console.log(loginData.username)
+		FetchAPI.get('/login', loginData.username, config).then(response => {
+					console.log(response.data)
+					router.push('/')
+				})
+	}
+
+
+
+	const submitLogin = (e) => {
+		e.preventDefault()
+		
+		try {
+			
+			FetchAPI.post('/login', loginData, config).then(response => {
+				if(response.data) {
+					
+					setUserDetails(response.data)
+					console.log(userDetails)
+					router.push('/')
+				}
+				
+			})
+		} catch (error) {
+			console.log(error)
+		}
+		
+	}
     return (
         <div>
            <div className="py-6">
@@ -26,18 +85,19 @@ function login() {
                 <span className="border-b w-1/5 lg:w-1/4"></span>
             </div>
             <div className="mt-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
-                <input className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="email" />
+                <label className="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                <input className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" name="username" type="username" value={loginData.username} onChange={handleChange} />
             </div>
             <div className="mt-4">
                 <div className="flex justify-between">
                     <label className="block text-gray-700 text-sm font-bold mb-2">Password</label>
                     <a href="#" className="text-xs text-gray-500">Forget Password?</a>
                 </div>
-                <input className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password" />
+                <input className="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password" name="password" value={loginData.password} onChange={handleChange} />
             </div>
             <div className="mt-8">
-                <button className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Login</button>
+                <button onClick={submitLogin} className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Login</button>
+				{/* <button onClick={getUser} className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Get User</button> */}
             </div>
             <div className="mt-4 flex items-center justify-between">
                 <span className="border-b w-1/5 md:w-1/4"></span>

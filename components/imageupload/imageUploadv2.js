@@ -11,7 +11,7 @@ import '@uppy/progress-bar/dist/style.css'
 import '@uppy/dashboard/dist/style.css'
 
 function ImageUploader() {
-    const { data: session, status } = useSession();
+   
     // const [dropdown, setDropDown] = useState(false)
     const [formData, setFormData] = useState({
         desc: '',
@@ -43,8 +43,8 @@ function ImageUploader() {
         // with file IDs in current upload
         // data: { id, fileIDs }
         uppy.setMeta({ title: formData.desc,
-            username: session.user.name,
-            userData: session.user.email.split('@')[0] })
+            username: 'session.user.name',
+            userData: '' })
         // console.log(`Starting upload ${id} for files ${fileIDs}`)
       })
       

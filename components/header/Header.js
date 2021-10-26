@@ -2,9 +2,15 @@
 import { Fragment, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useSession, signIn, signOut } from 'next-auth/react';
+
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+
+import { useContext } from "react";
+import { AuthContext } from "../../utils/AuthProvider";
+import login from '../../pages/login';
+import LogoutAPI from '../../lib/fetcher'
+import { responsePathAsArray } from 'graphql';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', current: true },
@@ -18,8 +24,25 @@ function classNames(...classes) {
 }
 
 export default function Header() {
-  const { data: session } = useSession();
+  const {userDetails, setUserDetails, loggedIn, setLoggedIn} = useContext(AuthContext);
+  
   const router = useRouter();
+  console.log(userDetails)
+
+  const login = () => {
+    router.push('/login')
+  }
+
+  const logout = () => {
+    try {
+      LogoutAPI.get('/logout').then(response => response.data)
+      setUserDetails(null)
+      setLoggedIn(false)
+      router.push('/login')
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <Disclosure as='nav' className='bg-gray-800 sticky top-0 z-50'>
@@ -45,11 +68,13 @@ export default function Header() {
                     src='https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg'
                     alt='Workflow'
                   />
-                  <a href='/'>
+                  <Link href="/">
+                  <a>
                     <span class='hidden lg:block font-semibold text-xl text-white tracking-tight'>
                       ResistZoo
                     </span>
                   </a>
+                  </Link>
                 </div>
                 <div className='hidden sm:block sm:ml-6'>
                   <div className='flex space-x-4'>
@@ -100,11 +125,8 @@ export default function Header() {
                       <span className='sr-only'>Open user menu</span>
                       <img
                         className='h-8 w-8 rounded-full'
-                        src={
-                          session
-                            ? session.user.image
-                            : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                        }
+                        src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+                        
                         alt=''
                       />
                     </Menu.Button>
@@ -119,7 +141,7 @@ export default function Header() {
                     leaveTo='transform opacity-0 scale-95'
                   >
                     <Menu.Items className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
-                      <Menu.Item>
+                      {userDetails ?  <Menu.Item>
                         {({ active }) => (
                           <a
                             href='#'
@@ -128,10 +150,11 @@ export default function Header() {
                               'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
-                            Your Profile
+                            Hello {userDetails}
                           </a>
                         )}
                       </Menu.Item>
+                    : null }
                       <Menu.Item>
                         {({ active }) => (
                           <a
@@ -145,11 +168,25 @@ export default function Header() {
                           </a>
                         )}
                       </Menu.Item>
-                      {!session && (
+                      {userDetails ? 
+                      <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          onClick={logout}
+                          className={classNames(
+                            active ? 'bg-gray-100' : '',
+                            'block px-4 py-2 text-sm text-gray-700'
+                          )}
+                        >
+                          Sign Out
+                        </button>
+                      )}
+                    </Menu.Item>
+                      : 
                         <Menu.Item>
                           {({ active }) => (
                             <button
-                              onClick={signIn}
+                              onClick={login}
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
@@ -159,28 +196,16 @@ export default function Header() {
                             </button>
                           )}
                         </Menu.Item>
-                      )}
+}
 
-                      {session && (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
-                              onClick={signOut}
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
-                              )}
-                            >
-                              Sign Out
-                            </button>
-                          )}
-                        </Menu.Item>
-                      )}
+                     
+                        
+                      
 
                       <Menu.Item>
                         {({ active }) => (
                           <button
-                            onClick={() => signOut()}
+                            // onClick={() => signOut()}
                             className={classNames(
                               active ? 'bg-gray-100' : '',
                               'block px-4 py-2 text-sm text-gray-700'
