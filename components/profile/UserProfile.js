@@ -11,7 +11,7 @@ export default function UserProfile({ user }) {
         />
         <div className='flex flex-col'>
           <h4 className='text-lg font-semibold text-center md:text-left'>
-            {user}
+            {user.username}
           </h4>
           <p className='text-coolGray-600'>
             Sed non nibh iaculis, posuere diam vitae, consectetur neque. Integer
@@ -19,6 +19,9 @@ export default function UserProfile({ user }) {
             sit amet mi luctus ligula euismod lobortis ultricies et nibh.
           </p>
         </div>
+      </div>
+      <div>
+        <button>Follow</button>
       </div>
       <div className='flex justify-center pt-4 space-x-4 align-center'>
         <a

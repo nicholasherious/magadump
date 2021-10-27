@@ -6,10 +6,10 @@ import { useRouter } from 'next/router';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 
-import { useContext } from "react";
-import { AuthContext } from "../../utils/AuthProvider";
+import { useContext } from 'react';
+import { AuthContext } from '../../utils/AuthProvider';
 import login from '../../pages/login';
-import LogoutAPI from '../../lib/fetcher'
+import LogoutAPI from '../../lib/fetcher';
 import { responsePathAsArray } from 'graphql';
 
 const navigation = [
@@ -24,25 +24,24 @@ function classNames(...classes) {
 }
 
 export default function Header() {
-  const {userDetails, setUserDetails, loggedIn, setLoggedIn} = useContext(AuthContext);
-  
+  const { userDetails, setUserDetails, loggedIn, setLoggedIn } =
+    useContext(AuthContext);
+
   const router = useRouter();
-  console.log(userDetails)
+  // console.log(userDetails.username);
 
   const login = () => {
-    router.push('/login')
-  }
+    router.push('/login');
+  };
 
   const logout = () => {
     try {
-      LogoutAPI.get('/logout').then(response => response.data)
-      setUserDetails(null)
-      setLoggedIn(false)
-      router.push('/login')
-    } catch (error) {
-      
-    }
-  }
+      LogoutAPI.get('/logout').then(response => response.data);
+      setUserDetails(null);
+      setLoggedIn(false);
+      router.push('/login');
+    } catch (error) {}
+  };
 
   return (
     <Disclosure as='nav' className='bg-gray-800 sticky top-0 z-50'>
@@ -68,12 +67,12 @@ export default function Header() {
                     src='https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg'
                     alt='Workflow'
                   />
-                  <Link href="/">
-                  <a>
-                    <span class='hidden lg:block font-semibold text-xl text-white tracking-tight'>
-                      ResistZoo
-                    </span>
-                  </a>
+                  <Link href='/'>
+                    <a>
+                      <span class='hidden lg:block font-semibold text-xl text-white tracking-tight'>
+                        ResistZoo
+                      </span>
+                    </a>
                   </Link>
                 </div>
                 <div className='hidden sm:block sm:ml-6'>
@@ -126,7 +125,6 @@ export default function Header() {
                       <img
                         className='h-8 w-8 rounded-full'
                         src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                        
                         alt=''
                       />
                     </Menu.Button>
@@ -141,20 +139,21 @@ export default function Header() {
                     leaveTo='transform opacity-0 scale-95'
                   >
                     <Menu.Items className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
-                      {userDetails ?  <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href='#'
-                            className={classNames(
-                              active ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700'
-                            )}
-                          >
-                            Hello {userDetails}
-                          </a>
-                        )}
-                      </Menu.Item>
-                    : null }
+                      {userDetails ? (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href='#'
+                              className={classNames(
+                                active ? 'bg-gray-100' : '',
+                                'block px-4 py-2 text-sm text-gray-700'
+                              )}
+                            >
+                              Hello {userDetails.username}
+                            </a>
+                          )}
+                        </Menu.Item>
+                      ) : null}
                       <Menu.Item>
                         {({ active }) => (
                           <a
@@ -168,21 +167,21 @@ export default function Header() {
                           </a>
                         )}
                       </Menu.Item>
-                      {userDetails ? 
-                      <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          onClick={logout}
-                          className={classNames(
-                            active ? 'bg-gray-100' : '',
-                            'block px-4 py-2 text-sm text-gray-700'
+                      {userDetails ? (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              onClick={logout}
+                              className={classNames(
+                                active ? 'bg-gray-100' : '',
+                                'block px-4 py-2 text-sm text-gray-700'
+                              )}
+                            >
+                              Sign Out
+                            </button>
                           )}
-                        >
-                          Sign Out
-                        </button>
-                      )}
-                    </Menu.Item>
-                      : 
+                        </Menu.Item>
+                      ) : (
                         <Menu.Item>
                           {({ active }) => (
                             <button
@@ -196,11 +195,7 @@ export default function Header() {
                             </button>
                           )}
                         </Menu.Item>
-}
-
-                     
-                        
-                      
+                      )}
 
                       <Menu.Item>
                         {({ active }) => (
